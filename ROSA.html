@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>For My Favorite Person ❤️</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", Arial, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #fff0f5;
+            color: #4a2633;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 15px 8%;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: bold;
+            color: #e75480;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #4a2633;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: #e75480;
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 100px 20px 50px;
+            background: linear-gradient(135deg, #ffd6e5, #fff5f8);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .heart {
+            font-size: 80px;
+            animation: heartbeat 1.5s infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.15);
+            }
+        }
+
+        .hero h1 {
+            font-size: clamp(40px, 8vw, 75px);
+            color: #d6336c;
+            margin: 15px 0;
+        }
+
+        .hero p {
+            font-size: 18px;
+            max-width: 650px;
+            margin: auto;
+            line-height: 1.7;
+        }
+
+        .button {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 14px 28px;
+            background: #e75480;
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            transition: 0.3s;
+            box-shadow: 0 8px 20px rgba(231,84,128,0.3);
+        }
+
+        .button:hover {
+            transform: translateY(-4px);
+            background: #d6336c;
+        }
+
+        /* Sections */
+        section {
+            padding: 90px 8%;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 35px;
+            color: #d6336c;
+            margin-bottom: 45px;
+        }
+
+        /* Story */
+        .story {
+            max-width: 850px;
+            margin: auto;
+            text-align: center;
+            line-height: 2;
+            font-size: 17px;
+        }
+
+        /* Reasons */
+        .reasons {
+            background: #fff;
+        }
+
+        .reason-grid {
+            max-width: 1000px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 25px;
+        }
+
+        .reason-card {
+            background: #fff0f5;
+            padding: 30px;
+            text-align: center;
+            border-radius: 20px;
+            transition: 0.3s;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+
+        .reason-card:hover {
+            transform: translateY(-8px);
+        }
+
+        .reason-card .icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+        }
+
+        .reason-card h3 {
+            color: #d6336c;
+            margin-bottom: 10px;
+        }
+
+
+
+        /* Love Letter */
+        .letter-section {
+            background: linear-gradient(135deg, #ffe1eb, #fff);
+        }
+
+        .letter {
+            max-width: 750px;
+            margin: auto;
+            background: white;
+            padding: 45px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            line-height: 2;
+            font-size: 17px;
+        }
+
+        .letter h3 {
+            text-align: center;
+            color: #d6336c;
+            margin-bottom: 25px;
+            font-size: 28px;
+        }
+
+        /* Future */
+        .future {
+            text-align: center;
+            background: #fff;
+        }
+
+        .future-box {
+            max-width: 750px;
+            margin: auto;
+            padding: 40px;
+            border-radius: 25px;
+            background: #fff0f5;
+            line-height: 2;
+        }
+
+        /* Surprise */
+        .surprise {
+            text-align: center;
+            background: linear-gradient(135deg, #d6336c, #e75480);
+            color: white;
+        }
+
+        .surprise .section-title {
+            color: white;
+        }
+
+        #hiddenMessage {
+            display: none;
+            max-width: 700px;
+            margin: 30px auto 0;
+            padding: 30px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 20px;
+            font-size: 20px;
+            line-height: 1.8;
+            animation: appear 0.8s ease;
+        }
+
+        @keyframes appear {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 30px;
+            background: #351722;
+            color: white;
+        }
+
+        /* Floating hearts */
+        .floating-heart {
+            position: fixed;
+            bottom: -30px;
+            font-size: 20px;
+            animation: floatUp 6s linear forwards;
+            pointer-events: none;
+            z-index: 999;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(-110vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Mobile */
+        @media (max-width: 700px) {
+            nav {
+                padding: 12px 5%;
+            }
+
+            nav ul {
+                gap: 10px;
+            }
+
+            nav a {
+                font-size: 11px;
+            }
+
+            .letter {
+                padding: 25px;
+            }
+
+            section {
+                padding: 70px 5%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">❤️ Us</div>
+
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#story">Our Story</a></li>
+            <li><a href="#reasons">Reasons</a></li>
+            <li><a href="#letter">Letter</a></li>
+        </ul>
+    </nav>
+
+
+    <!-- HOME -->
+    <section class="hero" id="home">
+
+        <div class="hero-content">
+
+            <div class="heart">❤️</div>
+
+            <h1>For My Favorite Person</h1>
+
+            <p>
+                Sana magustuhan mo ito
+            </p>
+
+            <a href="#story" class="button">
+                Start Our Story 💕
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- OUR STORY -->
+    <section id="story">
+
+        <h2 class="section-title">
+            Our Little Story 🌷
+        </h2>
+
+        <div class="story">
+
+            <p>
+                Una kala ko isa ka lang sa mga taong maki-kilala 
+                na hindi ko na ulit maki-kita at maka-kausap.
+                Pero ikaw pala yung taong sobrang ma-mahalin ko na pati ako na bigla.
+                
+            </p>
+
+            <br>
+
+            <p>
+                Hindi kita ina-asahan na dumating sa buhay ko 
+                pero nag pa-pasalamat ako na dumating ka.
+                Ikaw ang aking hiling na natupad.
+                Ikaw ang dalangin na dininig.
+                Ikaw ang pinangarap na natupad.
+            </p>
+
+            <br>
+
+            <p>
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- REASONS -->
+    <section class="reasons" id="reasons">
+
+        <h2 class="section-title">
+            Reasons You're Special 💗
+        </h2>
+
+        <div class="reason-grid">
+
+            <div class="reason-card">
+                <div class="icon">😊</div>
+                <h3>Your Smile</h3>
+                <p>
+                    Kapag naki-kita kitang naka-ngiti, sobrang cute mo.
+                    
+                </p>
+            </div>
+
+            <div class="reason-card">
+                <div class="icon">💖</div>
+                <h3>Your Heart</h3>
+                <p>
+                    Sobrang bait mo parang kang anghel na galing lagit.
+                </p>
+            </div>
+
+            <div class="reason-card">
+                <div class="icon">😂</div>
+                <h3>Your Humor</h3>
+                <p>
+                    Lagi mo akong na pa-pasaya kahit sa mga mali-li-liit na bagay.
+                </p>
+            </div>
+
+            <div class="reason-card">
+                <div class="icon">🌸</div>
+                <h3>You Being You</h3>
+                <p>
+                    Yung ikaw na walang halong kasinungalingan.
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+
+
+    <!-- LOVE LETTER -->
+    <section class="letter-section" id="letter">
+
+        <h2 class="section-title">
+            A Letter For You 💌
+        </h2>
+
+        <div class="letter">
+
+            <h3>Dear Rosa</h3>
+
+            <p>
+                Gusto ko lang na malaman mo na sobra kong tuwa na naki-lala kita.
+            </p>
+
+            <br>
+
+            <p>
+                Salamat dahil naki-lala kita.
+                Sana hindi ka mag sawa sa’kin kasi hinding hindi ako mag sa-sawa na mahalin ka araw-araw.
+            </p>
+
+            <br>
+
+            <p>
+                Hindi ko man alam ang pinakang magandanh salita, ngunit sana alam mo na labis kitang minamahal higit pa sa mga salita.
+            </p>
+
+            <br>
+
+            <p>
+                
+            </p>
+
+            <br>
+
+            <p>
+                With all my heart, ❤️
+                <br>
+                <strong>Uwan</strong>
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- FUTURE -->
+    <section class="future">
+
+        <h2 class="section-title">
+            Our Future ✨
+        </h2>
+
+        <div class="future-box">
+
+            <p>
+                More conversations.
+                More laughter.
+                More memories.
+                More adventures.
+            </p>
+
+            <br>
+
+            <p>
+                Sana ikaw pa rin ang kasama ko sa pag-tanda at pag lipad ng eroplano.
+            </p>
+
+            <br>
+
+            <p>
+                Ikaw lang ang aking iisang ma-mahalin, kung hindi ikaw, huwag na lang.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- SURPRISE -->
+    <section class="surprise">
+
+        <h2 class="section-title">
+            Something special
+        </h2>
+
+        <p>
+            So... I don’t know how to say this, but...
+        </p>
+
+        <button class="button" onclick="showMessage()">
+            Open Me
+        </button>
+
+        <div id="hiddenMessage">
+
+             
+
+            <p>
+                May I court you? 
+                May I be part of your life?
+                May I stay by your side?
+                May I be your future?
+                May I be your friend?
+                May I be your best friend?
+                May I be your good boy?
+                May I be your boyfriend?
+                May I be your husband?
+                May I be your only one?
+                May I be the for you?
+            </p>
+            <br>
+            <p>
+                Even if it takes a long time for you to answer me I’ll always wait for your answer.
+            </p>
+                
+
+            <br><br>
+
+            <strong>
+                Thank you for being you. 💗
+            </strong>
+
+        </div>
+
+    </section>
+
+
+    <!-- FOOTER -->
+    <footer>
+
+        <p>
+            Written with ❤️ by Uwan
+        </p>
+
+        <p>
+            © 2026 — Just for you.
+        </p>
+
+    </footer>
+
+
+    <!-- JAVASCRIPT -->
+    <script>
+
+        // Surprise message
+        function showMessage() {
+
+            const message = document.getElementById("hiddenMessage");
+
+            if (message.style.display === "block") {
+
+                message.style.display = "none";
+
+            } else {
+
+                message.style.display = "block";
+
+                createHearts();
+            }
+        }
+
+
+        // Floating hearts
+        function createHearts() {
+
+            for (let i = 0; i < 15; i++) {
+
+                const heart = document.createElement("div");
+
+                heart.classList.add("floating-heart");
+
+                heart.innerHTML = "❤️";
+
+                heart.style.left =
+                    Math.random() * 100 + "vw";
+
+                heart.style.animationDuration =
+                    (Math.random() * 3 + 4) + "s";
+
+                heart.style.fontSize =
+                    (Math.random() * 20 + 15) + "px";
+
+                document.body.appendChild(heart);
+
+                setTimeout(() => {
+
+                    heart.remove();
+
+                }, 7000);
+            }
+        }
+
+
+        // Automatically create hearts occasionally
+        setInterval(() => {
+
+            const heart = document.createElement("div");
+
+            heart.classList.add("floating-heart");
+
+            heart.innerHTML = "💗";
+
+            heart.style.left =
+                Math.random() * 100 + "vw";
+
+            heart.style.animationDuration =
+                (Math.random() * 3 + 4) + "s";
+
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+
+                heart.remove();
+
+            }, 7000);
+
+        }, 1800);
+
+    </script>
+
+</body>
+</html>
